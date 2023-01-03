@@ -6,7 +6,10 @@ const {DataTypes} = Sequelize
 const Users = db.define('users',{
      // this is the table name in the DB
     //  these below are the tables columns
-
+    // id:{
+    //     type:DataTypes.INTEGER,
+    //     primaryKey:true 
+    // },
     shul_id:{
         type:DataTypes.INTEGER 
     },
