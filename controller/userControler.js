@@ -162,8 +162,18 @@ export const userInfo = async (req,res)=>{
                 where:{
                     id:req.params.id
                 },
-            include: [{ model: Shul }]
+            include: [{ model: Shul}]
+            
         })
+        const pray = await Prayers.findAll({
+                where:{
+                    shul_id:shul[0].shul.shul_id
+                }
+           
+            
+        })
+        shul[0]['prayers'] = pray
+
         res.json(shul)
 } catch (error) {
     console.log(error);
