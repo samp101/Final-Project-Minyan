@@ -10,10 +10,10 @@
 /client/package-lock.json
 package-lock.json
 # testing
-coverage
+/coverage
 
 # production
-build
+/build
 
 # misc
 /client/.DS_Store
