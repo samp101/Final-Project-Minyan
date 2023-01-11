@@ -20,6 +20,18 @@ app.use(express.urlencoded({extend:true}))
 
 app.use(router)
 
+
+
+
+// app.use(express.static(path.join(__dirname, "./client/build")));
+app.use("/", express.static(path.join(__dirname, "./client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
+
+
 app.listen(process.env.PORT||5000 , () => {
     console.log(`we are running on ${process.env.PORT||5000}`);
 })
@@ -31,9 +43,3 @@ try {
     console.log(error);
     
 }
-
-app.use(express.static(path.join(__dirname, "./client/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});

@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "type": "module",
-  "proxy": "http://localhost:3000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "build":"cd client && npm install --force && npm run build"
   },
   "keywords": [],
   "author": "",
