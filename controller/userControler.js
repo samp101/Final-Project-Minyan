@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken'
 import Min from '../modul/tempMiny.js'
 import Prayers from '../modul/prayers.js'
 import FavouriteShul from "../modul/favourite_shul.js";
+import { Op } from 'sequelize';
 
 
 
@@ -184,6 +185,8 @@ export const userInfo = async (req,res)=>{
 export const shulList = async(req,res)=>{
     try {
         const shul = await Shul.findAll({})
+        
+
         res.json(shul)
     } catch (error) {
         console.log(error);
@@ -193,15 +196,23 @@ export const shulList = async(req,res)=>{
 export const shulsInCityFun = async(req,res)=>{
 
     try {
-        
         const shulsInCity = await Shul.findAll({
             where:{
                 shul_city_city:req.params.search
             }
-            
-            // include: Min,
-            // include: Minyan,
         })
+        if (shulsInCity == false){
+            let first1Charach = req.params.search.slice(0,1)
+            let first2Charach = req.params.search.slice(0,2)
+            const suggestion = await Shul.findAll({
+                where:{
+                    shul_city_city: {[Op.like]:`${first2Charach}%`}
+                },
+                attributes:['shul_city_city'] 
+
+            })
+            return res.json({suggestion})
+        }
         res.json(shulsInCity)
     } catch (error) {
         console.log(error);
@@ -211,6 +222,7 @@ export const shulsInCityFun = async(req,res)=>{
 export const shulTimes = async(req,res)=>{
     
     try {
+        console.log('hello');
         const shulTimes = await Prayers.findAll({
             where:{
                 shul_id:req.params.shulId
@@ -298,7 +310,6 @@ export const addToFav = async (req,res)=>{
         res.status(404).json({msg:`The Shul '${shul_name}' already exists`})
     }
 }
-
 export const deleteFromFav = async (req,res)=>{
     
     const { favId} = req.body
