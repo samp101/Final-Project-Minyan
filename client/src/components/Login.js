@@ -23,7 +23,7 @@ const LoginRegister = (props) => {
     const HandleClick = async () => {
             try{
               console.log(user);
-                const response = await axios.post('http://localhost:8080/login',{
+                const response = await axios.post('/login',{
                     user
                 },{
                     withCredentials:true,
