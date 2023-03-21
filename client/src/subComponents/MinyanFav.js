@@ -14,7 +14,7 @@ export const MinyanFav = (props)=>{
 
     const getTimes = async(e)=>{
         console.log(e.shul_id);
-        const response = await axios.get(`http://localhost:8080/shul-times/shul${e.shul_id}`)
+        const response = await axios.get(`/shul-times/shul${e.shul_id}`)
          if (response.status==200){
             setPrayers(response.data)
         }

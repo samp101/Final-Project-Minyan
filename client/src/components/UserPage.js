@@ -39,7 +39,7 @@ const UserDashboard = (props) =>{
 
             console.log('user.id',id);
             const getFavData = async()=>{
-                const response = await axios.get(`http://localhost:8080/favourite-shul/user=${id}`)
+                const response = await axios.get(`/favourite-shul/user=${id}`)
              if (response.status==200){
                 setFavShuls(response.data)
              }

@@ -50,7 +50,7 @@ const UserSearch = (props) => {
     
     const getMinyanim = async (id) => {
         
-        const response = await axios.get(`http://localhost:8080/shul-times/shul${id}`)
+        const response = await axios.get(`/shul-times/shul${id}`)
         console.log(response);
         if (response.status==200) setShuls(response.data)
        

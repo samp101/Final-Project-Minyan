@@ -54,7 +54,7 @@ export default function CardForShul(props) {
             })
             
             // const getFavData = async()=>{
-                let response1 = await axios.get(`http://localhost:8080/favourite-shul/user=${id}`)
+                let response1 = await axios.get(`/favourite-shul/user=${id}`)
              if (response1.status==200){
                 setFavShuls(response1.data)
             }
@@ -81,7 +81,7 @@ export default function CardForShul(props) {
               'Content-Type':'application/json',
           }
       })
-      let response1 = await axios.get(`http://localhost:8080/favourite-shul/user=${id}`)
+      let response1 = await axios.get(`/favourite-shul/user=${id}`)
       if (response1.status==200){
          setFavShuls(response1.data)
      }

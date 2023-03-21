@@ -52,7 +52,7 @@ const HandleClick = async () => {
         // if(shul_name=='' ||shul_address=='' || shul_city_city=='' || shul_country==''){
         //     setMsg('Please Fill All The Required Fields In')
         // }
-        const response = await axios.post('http://localhost:8080/register-shul',{
+        const response = await axios.post('/register-shul',{
             shul
         },{
             withCredentials:true,

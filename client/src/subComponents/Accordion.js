@@ -21,7 +21,7 @@ export default function SimpleAccordion(props) {
 
     const getMinyanim = async (id) => {
        if(shuls.length>0) return
-        const response = await axios.get(`http://localhost:8080/shul-times/shul${id}`)
+        const response = await axios.get(`/shul-times/shul${id}`)
         console.log(response);
         if (response.status==200) setShuls(response.data)
        
@@ -60,7 +60,7 @@ export default function SimpleAccordion(props) {
                   })
                   
                   // const getFavData = async()=>{
-                      let response1 = await axios.get(`http://localhost:8080/favourite-shul/user=${id}`)
+                      let response1 = await axios.get(`/favourite-shul/user=${id}`)
                    if (response1.status==200){
                       setFavShuls(response1.data)
                   }
@@ -88,7 +88,7 @@ export default function SimpleAccordion(props) {
                     'Content-Type':'application/json',
                 }
             })
-            let response1 = await axios.get(`http://localhost:8080/favourite-shul/user=${id}`)
+            let response1 = await axios.get(`/favourite-shul/user=${id}`)
             if (response1.status==200){
                setFavShuls(response1.data)
            }

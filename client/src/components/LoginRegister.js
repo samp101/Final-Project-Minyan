@@ -52,7 +52,7 @@ const LoginRegister = (props) => {
     const HandleClick = async () => {
         
             try{
-                const response = await axios.post('http://localhost:8080/register',{
+                const response = await axios.post('/register',{
                     user
                 },{
                     withCredentials:true,

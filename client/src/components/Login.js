@@ -22,7 +22,6 @@ const LoginRegister = (props) => {
 
     const HandleClick = async () => {
             try{
-              console.log(user);
                 const response = await axios.post('/login',{
                     user
                 },{

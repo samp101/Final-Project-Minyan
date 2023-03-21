@@ -11,7 +11,7 @@ export const CLEARUSERSEARCH = 'CLEARUSERSEARCH'
 
 export const getListOfAllShuls = (cityName,countryName) => async (dispatch)=>{
     try {
-        const response = await axios.get(`http://localhost:8080/city`)
+        const response = await axios.get(`/city`)
         // console.log(cityName);
         // console.log(countryName);
 
@@ -28,12 +28,10 @@ export const getListOfAllShuls = (cityName,countryName) => async (dispatch)=>{
 }
 export const getUserCitySearch = (cityName) => async (dispatch)=>{
     try {
-        const response = await axios.get(`http://localhost:8080/shul-times/city=${cityName}`)
+        const response = await axios.get(`/shul-times/city=${cityName}`)
 
         if (response.status==200){
             console.log(response.data);
-           console.log('hello') 
-           console.log('hello') 
         dispatch({
             type:USERSEARCH,
             payload:response.data,
@@ -48,7 +46,7 @@ export const getUserCitySearch = (cityName) => async (dispatch)=>{
 export const getFavs = (id) => async (dispatch)=>{
     try {
         console.log(id);
-        const response = await axios.get(`http://localhost:8080/user-info/${id}`)
+        const response = await axios.get(`/user-info/${id}`)
         if (response.status==200){
         dispatch({
             type:USERFAV,
