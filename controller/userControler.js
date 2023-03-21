@@ -17,6 +17,7 @@ Minyan.belongsTo(Shul,{foreignKey: "shul_id",})
 // Shul.hasOne(Min,{ foreignKey: "shul_id",})
 // Min.belongsTo(Shul,{foreignKey: "shul_id"})
 const addExtraMinyan =  (shul,minyanArray,minyanName)=>{
+    if(minyanArray==false) return
     minyanArray.forEach( async (prayTime) => {
         await Prayers.create({
             shul_id:shul.shul_id,
@@ -41,9 +42,10 @@ Shul.hasMany(FavouriteShul,{foreignKey: "shul_id"})
 FavouriteShul.belongsTo(Shul,{foreignKey: "shul_id"})
 
 export const register = async (req,res) =>{
-    console.log('hello')
     // const {user_id, shul_id, user_name, user_lastname, user_address, user_city, user_country, user_zip_code, user_email, user_password} = req.body.user;
     const {user_id, shul_id, user_name, user_lastname, user_address, user_city, user_country, user_zip_code, user_phone_number, user_email, user_password} = req.body.user;
+    console.log(user_country);
+    console.log(typeof user_country);
     const salt = await bcrypt.genSalt()
     const hashPassword = await bcrypt.hash(user_password,salt) // this is how we encrypt our information
     console.log(user_email);
@@ -239,20 +241,25 @@ export const shulTimes = async(req,res)=>{
     }
 }
 export const registerShul = async (req,res)=>{
-    const { shul_name, shul_rav, shul_address, shul_city_city, shul_country, shul_zip_code, shul_website, shul_phone_number, shachris, mincha, maariv } = req.body.shul
+    const { shul_name, shul_rav, shul_address, shul_city_city, shul_country, shul_zip_code, shul_website, shachris, mincha, maariv } = req.body.shul
+    // let {shul_phone_number} = req.body.shul
     try { 
         await Shul.create({
-            shul_name, shul_rav, shul_address, shul_city_city, shul_country, shul_zip_code, shul_website, shul_phone_number
+            shul_name, shul_rav, shul_address, shul_city_city, shul_country, shul_zip_code, shul_website
         })
         const newShul = await Shul.findAll({
             where:{shul_name:shul_name}
         })
+        console.log(shachris);
+        console.log(mincha);
+        console.log(maariv);
         addExtraMinyan(newShul[0],shachris,'shachris')
         addExtraMinyan(newShul[0],mincha,'mincha')
         addExtraMinyan(newShul[0],maariv,'maariv')
 
         res.json({msg:'Register succesful'})
     } catch (error) {
+        console.log(error);
         res.status(404).json({msg:`There Was An Error Registering The Shul Please Try Again`})
     }
 }
