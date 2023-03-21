@@ -1,0 +1,22 @@
+.input-main{
+    /* margin: 2;
+    border-color:#3C1961; */
+    /* input:{color: '#3C1961'}, */
+    /* width:60vw;
+    border-radius: 50px;
+    height:40px;
+     */
+            
+/* "& fieldset": { border:3, borderColor:'#3C1961',  borderRadius:10}, */
+        
+}
+.container-for-main{
+  /* background-image: url('C:/Users/user/Desktop/Final-Project/server/client/src/static/Frame-1.svg'); */
+  background-image: url('../static/Frame-1.svg');
+  height:85vh;
+
+  display:'flex';
+  flex-direction:'column';
+  justify-content:"flex-start";
+  align-content:"center"
+}

@@ -1,0 +1,33 @@
+@media only screen and (min-width: 320px) {
+    .main-container{
+        width: 100%;
+
+    }
+    .window-img{
+            margin-top:8;
+            display:'flex';
+            justify-content:'center';
+            align-content:'center';
+            /* height: 600px;
+            width: 431px; */
+            width: 80%;
+    }
+    .inputs-sel{
+        margin:15px;
+        color: black;
+        background-color:'#fefcf9';
+        width:95%;
+        /* height:40px */
+    }
+}
+@media only screen and (min-width: 992px) {
+.inputs{
+
+}
+.page-container{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-bottom:50px;
+}
+}
