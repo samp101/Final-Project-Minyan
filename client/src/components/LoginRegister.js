@@ -87,7 +87,6 @@ const LoginRegister = (props) => {
       setShuls(props.shulList.filter(city =>city.shul_city_city.toLowerCase().includes(event.target.value.toLowerCase())))
       // let a = props.shulList.filter((country)=> country.shul_country.toLowerCase().includes(event.target.value.toLowerCase())).filter(city =>city.shul_city_city.toLowerCase().includes(event.target.value.toLowerCase()))
       // )
-        console.log(shuls)
       setUser({...user,[event.target.name]:event.target.value})
       }, 500)
     }
@@ -104,7 +103,6 @@ const LoginRegister = (props) => {
     color:'#6f4a96',
     '&: hover':{backgroundColor:'#fefcf9',color:'#D0B1F2'}
 }
-console.log(user);
   return (
     <div className="main-container">
       <div >
@@ -148,8 +146,8 @@ console.log(user);
             id="user_city" 
             label="Enter City" 
             variant="outlined" 
-            // onChange={(e)=>storeInfo(e)} />
-            onChange={(e)=>doCityFilter(e)} />
+            onChange={(e)=>storeInfo(e)} />
+            {/* // onChange={(e)=>doCityFilter(e)} /> */}
 
             <TextField sx={input} 
             className='inputs-sel'
