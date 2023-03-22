@@ -16,18 +16,21 @@ Minyan.belongsTo(Shul,{foreignKey: "shul_id",})
 
 // Shul.hasOne(Min,{ foreignKey: "shul_id",})
 // Min.belongsTo(Shul,{foreignKey: "shul_id"})
-const addExtraMinyan =  (shul,minyanArray,minyanName)=>{
-    if(minyanArray==false) return
-    minyanArray.forEach( async (prayTime) => {
-        await Prayers.create({
-            shul_id:shul.shul_id,
-            times:prayTime,
-            prayer_name:minyanName
-         })        
-    });
-    
-}
 
+const addExtraMinyan = async (shul,minyanArray,minyanName)=>{
+    
+    if(minyanArray==false) return
+    minyanArray.map((prayTime,index,arr)=>{
+        arr[index] = { 
+                        shul_id:shul.shul_id,
+                        times:prayTime,
+                        prayer_name:minyanName
+                    }   
+        })
+    await Prayers.bulkCreate(minyanArray)
+    
+        
+}
 
 Shul.hasOne(Prayers,{ foreignKey: "shul_id",})
 Prayers.belongsTo(Shul,{foreignKey: "shul_id"})
@@ -250,13 +253,9 @@ export const registerShul = async (req,res)=>{
         const newShul = await Shul.findAll({
             where:{shul_name:shul_name}
         })
-        console.log(shachris);
-        console.log(mincha);
-        console.log(maariv);
         addExtraMinyan(newShul[0],shachris,'shachris')
         addExtraMinyan(newShul[0],mincha,'mincha')
         addExtraMinyan(newShul[0],maariv,'maariv')
-
         res.json({msg:'Register succesful'})
     } catch (error) {
         console.log(error);
@@ -362,24 +361,12 @@ export const getFavShul = async (req,res)=>{
 
 
 export const tempRegisterShul = async (req,res)=>{
-    console.log(req.body);
-    console.log(req.body.text);
-    const { shul_name, shul_rav, shul_address, shul_city_city, shul_country, shul_zip_code, shul_website, shul_phone_number} = req.body.text
-    const {shachris,mincha,maariv} = req.body.extraShachris
     try { 
-        await Shul.create({
-            shul_name, shul_rav, shul_address, shul_city_city, shul_country, shul_zip_code, shul_website, shul_phone_number
-        })
-        const newShul = await Shul.findAll({
-            where:{shul_name:shul_name}
-        })
-        await Min.create({
-           shul_id:newShul[0].shul_id, shachris, mincha, maariv  
-        })
+        await Prayers.bulkCreate(req.body)        
         res.json({msg:'Register succesful'})
     } catch (error) {
-        console.log(error)
-        res.status(404).json({msg:`The Shul '${shul_name}' already exists`})
+        console.log(error);
+        res.status(404).json({msg:`There Was An Error Registering The Shul Please Try Again`})
     }
 }
 export const tempMin = async (req,res)=>{

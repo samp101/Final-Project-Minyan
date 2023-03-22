@@ -68,7 +68,7 @@ const HandleClick = async () => {
     }
 }
 
-
+console.log(shul);
 
 const onChange = (e)=>{
     setShul({...shul,[e.target.name]:e.target.value})
@@ -125,6 +125,7 @@ const buttton = {
     color:'#6f4a96',
     '&: hover':{backgroundColor:'#fefcf9',color:'#D0B1F2'}
 }
+
 return(
     <div className="page-container" style={{display:'flex', justifyContent:'space-evenly'}}>
         
@@ -198,9 +199,6 @@ return(
                     )
                 })}
             <Button  sx={buttton} name='mincha' onClick={()=>addMinyan('mincha')}>Add Mincha</Button>
-
-            
-            
                 {shul.maariv.map((e,index)=>{
                     return(
                         <TextField key={index} className='inputs' type="time" sx={minyanInput} name={`maariv`} label={`Maariv #${index+1}`} value={shul.maariv[index]} variant="outlined" 
@@ -209,7 +207,8 @@ return(
                     )
                 })}
               <Button  sx={buttton} name='maariv' onClick={()=>addMinyan('maariv')}>Add Maariv</Button>
-        <Button sx={{ m:'15px', backgroundColor:'#3C1961', color:'white', width:'400px', height:'40px', textTransform: 'none', borderRadius:10, fontStyle:'Poppins', '&: hover':{backgroundColor:'#6f4a96',color:'white'} }} variant="contained" onClick={HandleClick}>Register Shul</Button>
+        
+            <Button sx={{ m:'15px', backgroundColor:'#3C1961', color:'white', width:'400px', height:'40px', textTransform: 'none', borderRadius:10, fontStyle:'Poppins', '&: hover':{backgroundColor:'#6f4a96',color:'white'} }} variant="contained" onClick={HandleClick}>Register Shul</Button> 
         </Box>
         
         {msg}

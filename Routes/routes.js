@@ -41,8 +41,6 @@ router.delete('/logout',logout)
 
 
 
-
-
 router.post('/register-shul1',tempRegisterShul)
 router.post('/temp-min',tempMin)
 // router.get('/ss/:shulId/user=:id',getFavourites)
