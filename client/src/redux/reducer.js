@@ -23,7 +23,6 @@ export const reducer = (state=initState,actions={})=>{
             .map(id => {
                 return actions.payload1.find(a => a.shul_city_city === id)
             })
-            console.log(unique,'reducer');
         return{...state,userCitySearch:actions.payload,suggestions:unique}
     case CLEARUSERSEARCH:
         return{...state,userCitySearch:[]}

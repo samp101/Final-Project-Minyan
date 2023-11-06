@@ -12,6 +12,7 @@ import {ShulInfoFav,MinyanFav} from '../subComponents/ShulInfoFav'
 import { Box } from "@mui/material"
 import { display } from "@mui/system"
 import frame from '../static/Frame-2.png'
+import Punctation from "../subComponents/Punctation"
 
 const UserDashboard = (props) =>{
 
@@ -36,8 +37,6 @@ const UserDashboard = (props) =>{
             setToken(decode)
             const expire = token.exp
             const id = decode.user.id
-
-            console.log('user.id',id);
             const getFavData = async()=>{
                 const response = await axios.get(`/favourite-shul/user=${id}`)
              if (response.status==200){
@@ -68,7 +67,7 @@ const UserDashboard = (props) =>{
                         fontWeight:'regular',
                         fontSize:'40px',
                         color: '#debfff'}}
-                    >Welcome {user.user_name}</Typography>
+                    >Welcome <Punctation firstWord={user?.user_name}/></Typography>
                     <Typography sx={{
                         fontStyle:'Gudea',
                         fontSize:'40px',

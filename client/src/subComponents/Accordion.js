@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import { CardActions,Box } from '@mui/material';
 import { useState } from 'react';
 import Minyanim from './Minyanim';
+import Punctation from './Punctation';
 
 
 export default function SimpleAccordion(props) {
@@ -22,7 +23,6 @@ export default function SimpleAccordion(props) {
     const getMinyanim = async (id) => {
        if(shuls.length>0) return
         const response = await axios.get(`/shul-times/shul${id}`)
-        console.log(response);
         if (response.status==200) setShuls(response.data)
        
     }
@@ -58,14 +58,11 @@ export default function SimpleAccordion(props) {
                           'Content-Type':'application/json',
                       }
                   })
-                  
-                  // const getFavData = async()=>{
-                      let response1 = await axios.get(`/favourite-shul/user=${id}`)
+
+                  let response1 = await axios.get(`/favourite-shul/user=${id}`)
                    if (response1.status==200){
                       setFavShuls(response1.data)
                   }
-                // }
-                  // getFavData()
             
           } catch (error) {
             
@@ -78,7 +75,7 @@ export default function SimpleAccordion(props) {
           try {
             e.stopPropagation()
             let id = props.userId 
-            if (id == '') return alert('Please Log In To Add to Favourites');
+            if (id == '') return alert('Please log in to add a favourites');
             
             const response = await axios.post('/add-to-fav',{
                shul_id, id
@@ -93,22 +90,11 @@ export default function SimpleAccordion(props) {
                setFavShuls(response1.data)
            }
       } catch (error) {
-      
-      
       }
-      
-      
-      
         }
-
-        
-
-
-
-
-
   return (
     <div >
+      
       <Accordion sx={{ width:'90vw', m:2, padding:3}} onClick={()=>getMinyanim(shul_id)} >
         <AccordionSummary
         // expandIcon={<ExpandMoreIcon  />}
@@ -117,10 +103,10 @@ export default function SimpleAccordion(props) {
         >
             <Box sx={{ display:'flex', flexDirection:'column', alignItems:'start',  }}>
                 <Typography sx={{fontSize:'24px', fontWeight:600, color:'#321154'}} >
-                    {shul_name}
+                 <Punctation firstWord= {shul_name}/>
                 </Typography> 
                 <Typography sx={{color:'#321154'}}>
-                {shul_address}, {shul_city_city}, {shul_country}
+                <Punctation firstWord ={shul_address}/> <Punctation firstWord ={shul_city_city}/> <Punctation firstWord ={shul_country}/>, 
                 </Typography>
                 
             </Box>
@@ -145,38 +131,9 @@ export default function SimpleAccordion(props) {
         <AccordionDetails>
             <Box sx={{ display:'flex', flexDirection:'column', alignItems:'start' }}>
             <div>
-                {shul_rav}
+              Rabbi <Punctation firstWord={shul_rav}/>
             </div>
-            <Minyanim prayers={shuls}/>
-            {/* <div style={{ display:'flex', justifyContent:'start' }}>
-                     <ol style={{padding:0}}>
-                     Shachris: 
-                        {shuls.filter(prayerName=>prayerName.prayer_name =='shachris').map((minyan)=>{
-                            return(
-                                <div>{minyan.times}</div>
-                            )
-                        })}
-                    </ol>
-
-                    <ol>
-                    Mincha:     
-                    {shuls.filter(prayerName=>prayerName.prayer_name =='mincha').map((minyan)=>{
-                            return(
-                            <div>{minyan.times}</div>
-                            )
-                        })}
-                        
-                    </ol>
-                     <ol>
-                     Marriv:  
-                    {shuls.filter(prayerName=>prayerName.prayer_name =='maariv').map((minyan)=>{
-                            return(
-                            <div>{minyan.times}</div>
-                            )
-                        })}
-
-                    </ol> 
-                </div>  */}
+              <Minyanim prayers={shuls}/>
             </Box>
             <CardActions>
                 {/* <Button size="small" onClick={()=>getMinyanim(shul_id)} >Check Times</Button> */}

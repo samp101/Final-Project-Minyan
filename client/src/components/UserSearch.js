@@ -10,6 +10,7 @@ import Accordion from '../subComponents/Accordion'
 import { Box, TextField, IconButton, InputAdornment} from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import {useNavigate, useParams} from 'react-router-dom'
+import Punctation from "../subComponents/Punctation"
 
 import {getUserCitySearch,clearUserSearch} from '../redux/actions'
 
@@ -35,7 +36,7 @@ const UserSearch = (props) => {
             let id = decode.user.id
             
             // const getFavData = async()=>{
-            //     const response = await axios.get(`http://localhost:8080/favourite-shul/user=${id}`)
+            //     const response = await axios.get(`/favourite-shul/user=${id}`)
             //  if (response.status==200){
             //     setFavShuls(response.data)
             // }}
@@ -51,7 +52,6 @@ const UserSearch = (props) => {
     const getMinyanim = async (id) => {
         
         const response = await axios.get(`/shul-times/shul${id}`)
-        console.log(response);
         if (response.status==200) setShuls(response.data)
        
     }
@@ -59,7 +59,7 @@ const UserSearch = (props) => {
         try {
                 event.preventDefault()
               
-              // const response = await axios.get(`http://localhost:8080/shul-times/city=${search}`)
+              // const response = await axios.get(`/shul-times/city=${search}`)
               // console.log(response);
               // if (response.status==200) setShuls(response.data)
               // props.clearReduxArray()
@@ -76,9 +76,6 @@ const UserSearch = (props) => {
             console.log(e);
         }}
 
-        
-        console.log(props.suggestions.length)
-        console.log('hello')
     return (
             <div  style={{ display: 'flex', width:'100%', flexDirection: "column", justifyContent:"center", alignItems:"center" }}>
             {/* <div style={{ display: 'flex', flexDirection: "row" }}> */}
@@ -118,8 +115,8 @@ const UserSearch = (props) => {
                             </>
                         )
                     }): (<div> 
-                            Seems like your search of ' <i><strong>{shulname}</strong></i> ' wasnt found. Maybe there was a mistake try again. Did you mean: {props.suggestions.map(({shul_city_city}) =>
-                                                                                                                                                               <p onClick={()=>suggestion(shul_city_city)}> ' {shul_city_city} '</p> )} 
+                            Seems like your search of ' <i><strong>{shulname}</strong></i> ' wasnt found. Maybe there was a mistake try again. {props.suggestions.length >0 && <div style={{marginTop:'10px'}}> Did you mean: {props.suggestions.map(({shul_city_city}) =>
+                                                                                                                                                               <p onClick={()=> suggestion(shul_city_city)}> ' <Punctation firstWord={shul_city_city}/> '</p> )} </div>}
                                                                                                                                                 
                         </div>) }
                 

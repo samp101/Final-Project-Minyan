@@ -31,7 +31,6 @@ export const getUserCitySearch = (cityName) => async (dispatch)=>{
         const response = await axios.get(`/shul-times/city=${cityName}`)
 
         if (response.status==200){
-            console.log(response.data);
         dispatch({
             type:USERSEARCH,
             payload:response.data,
