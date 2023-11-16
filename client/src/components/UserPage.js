@@ -91,7 +91,7 @@ const UserDashboard = (props) =>{
         src={frame}
       />
             </Box>
-                <ShulInfoFav shul={favShuls}/>
+                <ShulInfoFav shul={favShuls} userId={user.id}/>
             
         </div>)
 )}
