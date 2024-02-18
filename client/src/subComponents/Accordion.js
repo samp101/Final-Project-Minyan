@@ -12,6 +12,8 @@ import { CardActions,Box } from '@mui/material';
 import { useState } from 'react';
 import Minyanim from './Minyanim';
 import Punctation from './Punctation';
+import { GPS } from '../Icons/GPS';
+import styles from './styles.module.css'
 
 
 export default function SimpleAccordion(props) {
@@ -129,16 +131,18 @@ export default function SimpleAccordion(props) {
             
         </AccordionSummary>
         <AccordionDetails>
-            <Box sx={{ display:'flex', flexDirection:'column', alignItems:'start' }}>
-            <div>
-              Rabbi <Punctation firstWord={shul_rav}/>
-            </div>
-              <Minyanim prayers={shuls}/>
-            </Box>
-            <CardActions>
-                {/* <Button size="small" onClick={()=>getMinyanim(shul_id)} >Check Times</Button> */}
-                       
-            </CardActions>       
+           {!shuls.length
+                ?<Box>
+                    <span className={styles.gpsIcon}>
+                  <GPS size={'75'}/>
+                </span>
+                </Box> 
+                :<Box sx={{ display:'flex', flexDirection:'column', alignItems:'start' }}>
+                  <div>
+                    Rabbi <Punctation firstWord={shul_rav}/>
+                  </div>
+                    <Minyanim prayers={shuls}/>
+                </Box>}    
         </AccordionDetails>
       </Accordion>
     </div>
